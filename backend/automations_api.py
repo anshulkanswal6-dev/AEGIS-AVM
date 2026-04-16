@@ -383,11 +383,6 @@ async def clear_terminal_logs(session_id: str):
     count = log_service.clear_terminal_logs(session_id)
     return {"success": True, "count": count}
 
-
-        }
-    }
-
-
 # --- Global Activity Logs ---
 
 class ActivityLogRequest(BaseModel):
