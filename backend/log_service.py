@@ -48,6 +48,13 @@ def log_debug(automation_id: str, event: str, message: str, details: Optional[Di
 
 def log_exception(automation_id: str, event: str, exc: Exception) -> RunLogEntry:
     """Log an exception with full traceback in details."""
+    import traceback
+    return _write(
+        automation_id,
+        "error",
+        event,
+        str(exc),
+        {"traceback": traceback.format_exc()}
     )
 
 
