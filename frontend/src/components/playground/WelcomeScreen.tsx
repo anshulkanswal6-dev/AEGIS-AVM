@@ -60,6 +60,18 @@ export function WelcomeScreen() {
           </div>
         </div>
 
+        {/* Demo Video */}
+        <div className="w-full max-w-xl aspect-video rounded-2xl border border-[var(--th-border-strong)] th-surface overflow-hidden shadow-2xl scale-in duration-700">
+          <iframe 
+            className="w-full h-full"
+            src="https://www.youtube.com/embed/gu8FRINJjB8?rel=0" 
+            title="AEGIS AI - Walkthrough" 
+            frameBorder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowFullScreen
+          ></iframe>
+        </div>
+
         {/* Vertical Action Buttons */}
         <div className="flex flex-col gap-3 w-full max-w-sm">
            <button 

@@ -24,6 +24,18 @@ export default function DocsRoadmap() {
         </p>
       </div>
 
+      {/* Demo Video */}
+      <div className="relative rounded-2xl border border-[var(--th-border-strong)] th-surface overflow-hidden aspect-video shadow-2xl">
+        <iframe 
+          className="w-full h-full"
+          src="https://www.youtube.com/embed/gu8FRINJjB8?rel=0" 
+          title="AEGIS AI - Demo" 
+          frameBorder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          allowFullScreen
+        ></iframe>
+      </div>
+
       {/* Current State */}
       <div className="th-surface rounded-xl border border-[var(--th-border-strong)] p-6">
         <div className="flex items-center gap-2 mb-4">

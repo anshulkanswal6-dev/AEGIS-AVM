@@ -214,8 +214,15 @@ const Hero = React.memo(({ onGetStarted }: { onGetStarted: () => void }) => {
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#f97316]/10 z-0 blur-3xl rounded-3xl pointer-events-none"></div>
         <div className="absolute -inset-2 shadow-[0_0_40px_rgba(249,115,22,0.15)] z-0 rounded-3xl pointer-events-none"></div>
         
-        <div className="relative z-10 p-1.5 rounded-xl bg-gray-900/50 border border-gray-700/50 backdrop-blur-xl shadow-2xl overflow-hidden">
-             <img src={uiss} alt="Aegis Dashboard" className="w-full h-auto rounded-lg opacity-90 group-hover:opacity-100 transition-opacity" />
+        <div className="relative z-10 p-1.5 rounded-2xl bg-gray-900/50 border border-gray-700/50 backdrop-blur-xl shadow-2xl overflow-hidden aspect-video">
+          <iframe 
+            className="w-full h-full rounded-xl"
+            src="https://www.youtube.com/embed/gu8FRINJjB8?rel=0" 
+            title="AEGIS AI - Prompt to Onchain Jobs" 
+            frameBorder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowFullScreen
+          ></iframe>
         </div>
       </div>
     </section>
