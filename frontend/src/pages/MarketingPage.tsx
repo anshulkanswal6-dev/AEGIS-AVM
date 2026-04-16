@@ -202,7 +202,7 @@ const Hero = React.memo(({ onGetStarted }: { onGetStarted: () => void }) => {
 
       <div className="flex flex-col sm:flex-row items-center gap-4 mb-16 relative z-10">
         <Button variant="gradient" size="lg" className="px-7 py-5 text-sm shadow-[0_0_30px_-5px_#aef98e55]" onClick={onGetStarted}>Get Started</Button>
-        <Button variant="secondary" size="lg" className="px-7 py-5 text-sm">Open Docs</Button>
+        <Button variant="secondary" size="lg" className="px-7 py-5 text-sm" onClick={() => navigate("/documentation")}>Open Docs</Button>
       </div>
 
       <div className="w-full max-w-4xl relative group">
@@ -331,7 +331,7 @@ const Launch = React.memo(({ onLaunch }: { onLaunch: () => void }) => {
 
                 <div className="flex flex-col sm:flex-row justify-center gap-4">
                     <Button variant="gradient" size="lg" className="px-8 py-4 text-sm shadow-[0_0_40px_-10px_#aef98e]" onClick={onLaunch}>Launch Aegis</Button>
-                    <Button variant="secondary" size="lg" className="px-8 py-4 text-sm">View Documentation</Button>
+                    <Button variant="secondary" size="lg" className="px-8 py-4 text-sm" onClick={() => navigate("/documentation")}>View Documentation</Button>
                 </div>
             </div>
         </section>
