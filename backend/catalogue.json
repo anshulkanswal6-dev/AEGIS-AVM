@@ -1,0 +1,290 @@
+{
+  "version": "1.0.0",
+  "meta": {
+    "name": "Onchain Automation Trigger Catalogue (AVM Native)",
+    "description": "Source of truth for triggers targeting Algorand AVM. Supports Algorand addresses, Asset IDs, and microAlgo units."
+  },
+  "global_required_fields": [
+    "chain",
+    "rpc_url",
+    "wallet_address"
+  ],
+  "field_definitions": {
+    "chain": {
+      "type": "string",
+      "question": "Which chain should I use? (Default: Algorand Testnet)"
+    },
+    "rpc_url": {
+      "type": "url",
+      "question": "Please provide the Algod RPC URL."
+    },
+    "wallet_address": {
+      "type": "algorand_address",
+      "question": "Which Algorand Agent Wallet address should execute this automation?"
+    },
+    "timezone": {
+      "type": "string",
+      "question": "What timezone should I use?"
+    },
+    "date": {
+      "type": "date",
+      "question": "What date should I use?"
+    },
+    "time": {
+      "type": "time",
+      "question": "What time should I use?"
+    },
+    "interval": {
+      "type": "interval",
+      "question": "What interval should I use? Example: 5m, 1h, 24h"
+    },
+    "cron": {
+      "type": "cron",
+      "question": "Please provide the cron expression."
+    },
+    "asset": {
+      "type": "string",
+      "question": "Which Asset ID (ASA) or native ALGO should I track?"
+    },
+    "quote_currency": {
+      "type": "string",
+      "question": "Which quote currency should I use? Example: USD"
+    },
+    "threshold": {
+      "type": "number_or_string",
+      "question": "What threshold should trigger this automation?"
+    },
+    "lower_bound": {
+      "type": "number_or_string",
+      "question": "What lower bound should I use?"
+    },
+    "upper_bound": {
+      "type": "number_or_string",
+      "question": "What upper bound should I use?"
+    },
+    "percent_change": {
+      "type": "number",
+      "question": "What percent change should trigger this automation?"
+    },
+    "period": {
+      "type": "string",
+      "question": "What period should I use? Example: 1h, 24h"
+    },
+    "price_source": {
+      "type": "string",
+      "question": "Which price source should I use? Example: pact, tinyman"
+    },
+    "token": {
+      "type": "string",
+      "question": "Which ASA or ALGO balance should I watch?"
+    },
+    "token_address": {
+      "type": "string",
+      "question": "What is the Algorand Asset ID (ASA)?"
+    },
+    "recipient_address": {
+      "type": "algorand_address",
+      "question": "What is the recipient Algorand address?"
+    },
+    "minimum_amount": {
+      "type": "number_or_string",
+      "question": "What minimum amount (in ALGO or microAlgos) should I use?"
+    },
+    "contract_address": {
+      "type": "algorand_address",
+      "question": "Which Application ID or Account should I monitor?"
+    },
+    "event_signature": {
+      "type": "string",
+      "question": "What transaction note or app-call method should I watch for?"
+    },
+    "watched_address": {
+      "type": "algorand_address",
+      "question": "Which Algorand address should I monitor?"
+    },
+    "gas_threshold": {
+      "type": "number",
+      "question": "What fee threshold (in microAlgos) should I use?"
+    },
+    "health_source": {
+      "type": "string",
+      "question": "Which network health source should I use?"
+    },
+    "protocol": {
+      "type": "string",
+      "question": "Which protocol should I use?"
+    },
+    "position_reference": {
+      "type": "string",
+      "question": "Which position should I monitor?"
+    },
+    "pool": {
+      "type": "string",
+      "question": "Which pool should I monitor?"
+    },
+    "position_id": {
+      "type": "string",
+      "question": "What is the position ID?"
+    },
+    "collection": {
+      "type": "string",
+      "question": "Which NFT/ARC collection should I use?"
+    },
+    "floor_price_source": {
+      "type": "string",
+      "question": "Which floor price source should I use?"
+    },
+    "marketplace": {
+      "type": "string",
+      "question": "Which marketplace should I use?"
+    },
+    "trait_filter": {
+      "type": "string",
+      "question": "What NFT trait filter should I use?"
+    },
+    "faucet_url": {
+      "type": "url",
+      "question": "What is the faucet URL?"
+    },
+    "claim_method": {
+      "type": "string",
+      "question": "How does the faucet claim work?"
+    },
+    "api_url": {
+      "type": "url",
+      "question": "What API URL should I use?"
+    },
+    "response_field": {
+      "type": "string",
+      "question": "Which response field should I read from the API?"
+    },
+    "operator": {
+      "type": "enum",
+      "allowed": ["eq", "neq", "gt", "gte", "lt", "lte", "contains", "not_contains"],
+      "question": "Which comparison operator should I use?"
+    },
+    "feed_url": {
+      "type": "url",
+      "question": "What feed URL should I monitor?"
+    },
+    "approver_reference": {
+      "type": "string",
+      "question": "Who should approve this action?"
+    },
+    "approver_references": {
+      "type": "array",
+      "question": "Who are the approvers?"
+    },
+    "duration": {
+      "type": "string",
+      "question": "How long should the condition remain true?"
+    },
+    "retry_interval": {
+      "type": "interval",
+      "question": "How often should retries happen?"
+    },
+    "timeout": {
+      "type": "interval",
+      "question": "What timeout should I use?"
+    },
+    "previous_step_reference": {
+      "type": "string",
+      "question": "Which previous step should this depend on?"
+    },
+    "to": {
+      "type": "email",
+      "question": "Which email should receive notifications?"
+    },
+    "notification_cooldown": {
+      "type": "number",
+      "question": "How many seconds should we wait between notifications? (Optional, default is 300s)"
+    }
+  },
+  "triggers": [
+    {
+      "type": "run_once_at_datetime",
+      "category": "time",
+      "python_handler": "trigger_run_once_at_datetime",
+      "description": "Run once at a specific date and time.",
+      "required_fields": ["date", "time", "timezone"]
+    },
+    {
+      "type": "run_daily_at_time",
+      "category": "time",
+      "python_handler": "trigger_run_daily_at_time",
+      "description": "Run every day at a fixed time.",
+      "required_fields": ["time", "timezone"]
+    },
+    {
+      "type": "run_every_interval",
+      "category": "time",
+      "python_handler": "trigger_run_every_interval",
+      "description": "Run repeatedly at an interval.",
+      "required_fields": ["interval"]
+    },
+    {
+      "type": "token_price_below",
+      "category": "price",
+      "python_handler": "trigger_token_price_below",
+      "description": "Trigger when ALGO or ASA price goes below threshold.",
+      "required_fields": ["asset", "quote_currency", "threshold", "price_source"]
+    },
+    {
+      "type": "token_price_above",
+      "category": "price",
+      "python_handler": "trigger_token_price_above",
+      "description": "Trigger when ALGO or ASA price goes above threshold.",
+      "required_fields": ["asset", "quote_currency", "threshold", "price_source"]
+    },
+    {
+      "type": "wallet_balance_below",
+      "category": "wallet",
+      "python_handler": "trigger_wallet_balance_below",
+      "description": "Trigger when Algorand wallet balance falls below threshold (use ALGO or MicroAlgos).",
+      "required_fields": ["token", "threshold"]
+    },
+    {
+      "type": "wallet_balance_above",
+      "category": "wallet",
+      "python_handler": "trigger_wallet_balance_above",
+      "description": "Trigger when Algorand wallet balance rises above threshold (use ALGO or MicroAlgos).",
+      "required_fields": ["token", "threshold"]
+    },
+    {
+      "type": "incoming_transfer_detected",
+      "category": "wallet",
+      "python_handler": "trigger_incoming_transfer_detected",
+      "description": "Trigger when an incoming payment is detected in the Algorand wallet address. Supports {{amount}} and {{new_balance}} placeholders.",
+      "required_fields": ["token"],
+      "optional_fields": ["minimum_amount", "threshold"]
+    },
+    {
+      "type": "contract_event_emitted",
+      "category": "onchain",
+      "python_handler": "trigger_contract_event_emitted",
+      "description": "Trigger when an Algorand Application emits a specific log or state change.",
+      "required_fields": ["contract_address", "event_signature"]
+    },
+    {
+      "type": "new_block",
+      "category": "onchain",
+      "python_handler": "trigger_new_block",
+      "description": "Trigger on every new Algorand block (every ~3 seconds).",
+      "required_fields": []
+    },
+    {
+      "type": "address_activity_detected",
+      "category": "onchain",
+      "python_handler": "trigger_address_activity_detected",
+      "description": "Trigger when a watched Algorand address performs activity.",
+      "required_fields": ["watched_address"]
+    },
+    {
+      "type": "webhook_received",
+      "category": "external",
+      "python_handler": "trigger_webhook_received",
+      "description": "Trigger when a webhook is received.",
+      "required_fields": ["webhook_name"]
+    }
+  ]
+}

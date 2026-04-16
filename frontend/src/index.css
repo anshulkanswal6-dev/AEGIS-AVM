@@ -1,0 +1,307 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+@import "tailwindcss";
+@plugin "tailwindcss-animate";
+
+@theme {
+  --color-primary-50: #f9f9f9;
+  --color-primary-100: #f3f3f3;
+  --color-primary-200: #eeeeee;
+  --color-primary-300: #e8e8e8;
+  --color-primary-400: #e2e2e2;
+  --color-primary-500: #dadada;
+  --color-primary-600: #c6c6c6;
+  --color-primary-700: #777777;
+  --color-primary-800: #5e5e5e;
+  --color-primary-900: #474747;
+  --color-primary-950: #1a1c1c;
+
+  /* Semantic tokens - resolved at runtime via CSS vars */
+  --color-bg: var(--th-bg);
+  --color-bg-secondary: var(--th-bg-secondary);
+  --color-surface: var(--th-surface);
+  --color-surface-low: var(--th-surface-low);
+  --color-surface-elevated: var(--th-surface-elevated);
+  --color-surface-container: var(--th-surface-container);
+  --color-outline: var(--th-border);
+  --color-border-strong: var(--th-border-strong);
+  --color-text-primary: var(--th-text-primary);
+  --color-text-secondary: var(--th-text-secondary);
+  --color-text-tertiary: var(--th-text-tertiary);
+  --color-text-inverse: var(--th-text-inverse);
+
+  /* Derived surfaces */
+  --color-surface-hover: var(--th-surface-hover);
+  --color-surface-active: var(--th-surface-active);
+  --color-surface-input: var(--th-surface-input);
+}
+
+/* ======================================================
+   LIGHT PALETTE
+   ====================================================== */
+:root {
+  color-scheme: light;
+
+  --th-bg: #f9f9f9;
+  --th-bg-secondary: #f3f3f3;
+  --th-surface: #ffffff;
+  --th-surface-low: #f3f3f3;
+  --th-surface-elevated: #ffffff;
+  --th-surface-container: #eeeeee;
+  --th-surface-hover: #f5f5f5;
+  --th-surface-active: #eeeeee;
+  --th-surface-input: #fafafa;
+
+  --th-border: rgba(198, 198, 198, 0.15);
+  --th-border-strong: #eeeeee;
+
+  --th-text-primary: #000000;
+  --th-text-secondary: #71717a;
+  --th-text-tertiary: #a1a1aa;
+  --th-text-inverse: #ffffff;
+
+  /* Glass */
+  --th-glass-bg: rgba(255, 255, 255, 0.8);
+  --th-glass-border: rgba(198, 198, 198, 0.15);
+
+  /* Shadows */
+  --th-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --th-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+  --th-shadow-lg: 0 10px 40px -10px rgba(0,0,0,0.05);
+  --th-shadow-xl: 0 20px 50px -15px rgba(0,0,0,0.08);
+
+  /* Selection */
+  --th-selection-bg: #000000;
+  --th-selection-text: #ffffff;
+
+  /* Scrollbar */
+  --th-scrollbar-thumb: #e8e8e8;
+  --th-scrollbar-thumb-hover: #e2e2e2;
+}
+
+/* ======================================================
+   DARK PALETTE — Premium layered dark
+   ====================================================== */
+.dark {
+  color-scheme: dark;
+
+  --th-bg: #0c0d12;
+  --th-bg-secondary: #111318;
+  --th-surface: #16181f;
+  --th-surface-low: #111318;
+  --th-surface-elevated: #1c1f28;
+  --th-surface-container: #1c1f28;
+  --th-surface-hover: #1e2129;
+  --th-surface-active: #24272f;
+  --th-surface-input: #111318;
+
+  --th-border: rgba(255, 255, 255, 0.06);
+  --th-border-strong: rgba(255, 255, 255, 0.09);
+
+  --th-text-primary: #e8eaed;
+  --th-text-secondary: #9ca3af;
+  --th-text-tertiary: #6b7280;
+  --th-text-inverse: #000000;
+
+  /* Glass */
+  --th-glass-bg: rgba(22, 24, 31, 0.85);
+  --th-glass-border: rgba(255, 255, 255, 0.06);
+
+  /* Shadows — deeper, more subtle in dark */
+  --th-shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.25);
+  --th-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.3), 0 2px 4px -2px rgb(0 0 0 / 0.2);
+  --th-shadow-lg: 0 10px 40px -10px rgba(0,0,0,0.4);
+  --th-shadow-xl: 0 20px 50px -15px rgba(0,0,0,0.5);
+
+  /* Selection */
+  --th-selection-bg: #3b82f6;
+  --th-selection-text: #ffffff;
+
+  /* Scrollbar - ULTRA VISIBLE */
+  --th-scrollbar-thumb: #4b4e5a;
+  --th-scrollbar-thumb-hover: #3b82f6;
+  --th-scrollbar-track: rgba(255, 255, 255, 0.03);
+}
+
+/* ======================================================
+   BASE STYLES
+   ====================================================== */
+html {
+  font-size: 14px; /* Reduced from 15px for better density */
+}
+
+@layer base {
+  body {
+    @apply antialiased select-none;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    margin: 0;
+    letter-spacing: -0.01em;
+    font-size: 13px;
+    background-color: var(--th-bg);
+    color: var(--th-text-primary);
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  letter-spacing: -0.02em;
+  font-weight: 700;
+  color: var(--th-text-primary);
+}
+
+/* Selection */
+::selection {
+  background: var(--th-selection-bg);
+  color: var(--th-selection-text);
+}
+
+/* ======================================================
+   SURFACE UTILITIES
+   ====================================================== */
+.surface-card {
+  background: var(--th-surface);
+  border: 1px solid var(--th-border);
+  border-radius: 4px;
+  box-shadow: var(--th-shadow-md);
+}
+
+.surface-inset {
+  background: var(--th-surface-low);
+  border: 1px solid var(--th-border);
+  border-radius: 4px;
+}
+
+/* ======================================================
+   BUTTON UTILITIES
+   ====================================================== */
+.btn-primary {
+  background: #000000;
+  color: #ffffff;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.dark .btn-primary {
+  background: #e8eaed;
+  color: #000000;
+}
+.btn-primary:hover {
+  background: #1a1c1c;
+  transform: translateY(-1px);
+}
+.dark .btn-primary:hover {
+  background: #d1d5db;
+}
+
+.btn-secondary {
+  background: var(--th-surface);
+  color: var(--th-text-primary);
+  border: 1px solid var(--th-border-strong);
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.btn-secondary:hover {
+  background: var(--th-surface-hover);
+}
+
+/* ======================================================
+   GLASSMORPHISM
+   ====================================================== */
+.glass {
+  background: var(--th-glass-bg);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--th-glass-border);
+}
+
+/* ======================================================
+   SCROLLBAR
+   ====================================================== */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 14px;
+  height: 14px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+  border-left: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #5a5d6a; /* Lightened from 3a3d4a for better visibility */
+  border-radius: 100px;
+  border: 4px solid transparent; /* Creates the "inner slider" look */
+  background-clip: content-box;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: #7a7d8a;
+}
+
+.min-h-0 {
+  min-height: 0;
+}
+
+.h-full {
+  height: 100%;
+}
+
+.max-h-full {
+  max-height: 100%;
+}
+.custom-scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ======================================================
+   PRISM SYNTAX (Light)
+   ====================================================== */
+.prism-code .token.function { color: #795E26; }
+.prism-code .token.string { color: #A31515; }
+.prism-code .token.keyword { color: #0000FF; }
+.prism-code .token.comment { color: #008000; font-style: italic; }
+.prism-code .token.class-name { color: #267F99; }
+.prism-code .token.operator { color: #000000; }
+.prism-code .token.punctuation { color: #000000; }
+.prism-code .token.number { color: #098658; }
+
+/* PRISM SYNTAX (Dark) */
+.dark .prism-code .token.function { color: #dcdcaa; }
+.dark .prism-code .token.string { color: #ce9178; }
+.dark .prism-code .token.keyword { color: #569cd6; }
+.dark .prism-code .token.comment { color: #6a9955; font-style: italic; }
+.dark .prism-code .token.class-name { color: #4ec9b0; }
+.dark .prism-code .token.operator { color: #d4d4d4; }
+.dark .prism-code .token.punctuation { color: #d4d4d4; }
+.dark .prism-code .token.number { color: #b5cea8; }
+
+/* ======================================================
+   THEME-AWARE UTILITY SHORTHANDS
+   Used throughout components via Tailwind arbitrary values
+   ====================================================== */
+
+/* Semantic background classes */
+.th-bg { background-color: var(--th-bg); }
+.th-bg-secondary { background-color: var(--th-bg-secondary); }
+.th-surface { background-color: var(--th-surface); }
+.th-surface-low { background-color: var(--th-surface-low); }
+.th-surface-elevated { background-color: var(--th-surface-elevated); }
+.th-surface-hover { background-color: var(--th-surface-hover); }
+.th-surface-input { background-color: var(--th-surface-input); }
+
+/* Semantic text classes */
+.th-text { color: var(--th-text-primary); }
+.th-text-secondary { color: var(--th-text-secondary); }
+.th-text-tertiary { color: var(--th-text-tertiary); }
+
+/* Semantic border classes */
+.th-border { border-color: var(--th-border-strong); }
+.th-border-soft { border-color: var(--th-border); }
+
+/* Transition utility for smooth theme switching */
+.theme-transition {
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+}

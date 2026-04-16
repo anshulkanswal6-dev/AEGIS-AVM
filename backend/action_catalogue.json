@@ -1,0 +1,112 @@
+{
+  "version": "1.1.0",
+  "meta": {
+    "name": "Onchain Automation Action Catalogue (AVM Native)",
+    "description": "Source of truth for AVM-native actions targeting Algorand Testnet. Uses Algorand addresses and Asset IDs."
+  },
+  "field_definitions": {
+    "asset_id": {
+      "type": "string",
+      "question": "What is the Algorand Asset ID (ASA)?"
+    },
+    "recipient_address": {
+      "type": "algorand_address",
+      "question": "What is the recipient Algorand address?"
+    },
+    "amount": {
+      "type": "number",
+      "question": "What amount (in ALGO or MicroAlgos) should be used?"
+    },
+    "app_id": {
+      "type": "number",
+      "question": "Which Algorand Application ID should I call?"
+    },
+    "app_args": {
+      "type": "array",
+      "question": "What arguments should I pass to the application call? (Comma-separated base64 or strings)"
+    },
+    "dex_name": {
+      "type": "string",
+      "question": "Which Algorand DEX should I use? Example: Tinyman, Pact"
+    },
+    "asset_in": {
+      "type": "string",
+      "question": "What is the input Asset ID?"
+    },
+    "asset_out": {
+      "type": "string",
+      "question": "What is the output Asset ID?"
+    },
+    "amount_in": {
+      "type": "number",
+      "question": "How much input asset should be swapped?"
+    },
+    "slippage_bps": {
+      "type": "number",
+      "question": "What slippage in basis points should I use? Example: 100 for 1%"
+    },
+    "telegram_message": {
+      "type": "string",
+      "question": "What message should I send you on Telegram?"
+    },
+    "email_subject": {
+      "type": "string",
+      "question": "What should the alert email subject be?"
+    },
+    "email_body": {
+      "type": "string",
+      "question": "What message would you like to see in the email?"
+    },
+    "to": {
+      "type": "email",
+      "question": "Which email should receive the notification?"
+    }
+  },
+  "actions": [
+    {
+      "type": "send_native_token",
+      "category": "wallet",
+      "python_handler": "action_send_native_token",
+      "description": "Send ALGO from the Agent Wallet to a recipient.",
+      "required_fields": ["recipient_address", "amount"],
+      "integration_requirements": ["algosdk"]
+    },
+    {
+      "type": "send_asa",
+      "category": "wallet",
+      "python_handler": "action_send_asa",
+      "description": "Send an Algorand Standard Asset (ASA) to a recipient.",
+      "required_fields": ["asset_id", "recipient_address", "amount"],
+      "integration_requirements": ["algosdk"]
+    },
+    {
+      "type": "app_call",
+      "category": "smart_contract",
+      "python_handler": "action_app_call",
+      "description": "Perform an Application Call (NoOp) to an Algorand Smart Contract.",
+      "required_fields": ["app_id"],
+      "optional_fields": ["app_args"]
+    },
+    {
+      "type": "swap_tinyman",
+      "category": "defi",
+      "python_handler": "action_swap_tinyman",
+      "description": "Swap assets using the Tinyman DEX protocol on Algorand.",
+      "required_fields": ["asset_in", "asset_out", "amount_in", "slippage_bps"]
+    },
+    {
+      "type": "log_message",
+      "category": "system",
+      "python_handler": "action_log_message",
+      "description": "Log a message to the internal execution terminal.",
+      "required_fields": ["message"]
+    },
+    {
+      "type": "send_telegram_notification",
+      "category": "notification",
+      "python_handler": "action_send_telegram",
+      "description": "Send a direct Telegram notification to the user.",
+      "required_fields": ["telegram_message"]
+    }
+  ]
+}

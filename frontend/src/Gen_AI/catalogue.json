@@ -1,0 +1,585 @@
+{
+  "version": "1.0.0",
+  "meta": {
+    "name": "Onchain Automation Trigger Catalogue",
+    "description": "Source of truth for triggers, required fields, validation hints, and Python handler mapping."
+  },
+  "global_required_fields": [
+    "chain",
+    "rpc_url",
+    "wallet_address"
+  ],
+  "field_definitions": {
+    "chain": {
+      "type": "string",
+      "question": "Which chain should I use for this automation?"
+    },
+    "rpc_url": {
+      "type": "url",
+      "question": "Please provide the RPC URL for that chain."
+    },
+    "wallet_address": {
+      "type": "evm_address",
+      "question": "Which Agent Wallet address should execute this automation?"
+    },
+    "timezone": {
+      "type": "string",
+      "question": "What timezone should I use?"
+    },
+    "date": {
+      "type": "date",
+      "question": "What date should I use?"
+    },
+    "time": {
+      "type": "time",
+      "question": "What time should I use?"
+    },
+    "interval": {
+      "type": "interval",
+      "question": "What interval should I use? Example: 5m, 1h, 24h"
+    },
+    "cron": {
+      "type": "cron",
+      "question": "Please provide the cron expression."
+    },
+    "asset": {
+      "type": "string",
+      "question": "Which asset/token should I track?"
+    },
+    "quote_currency": {
+      "type": "string",
+      "question": "Which quote currency should I use? Example: USD"
+    },
+    "threshold": {
+      "type": "number_or_string",
+      "question": "What threshold should trigger this automation?"
+    },
+    "lower_bound": {
+      "type": "number_or_string",
+      "question": "What lower bound should I use?"
+    },
+    "upper_bound": {
+      "type": "number_or_string",
+      "question": "What upper bound should I use?"
+    },
+    "percent_change": {
+      "type": "number",
+      "question": "What percent change should trigger this automation?"
+    },
+    "period": {
+      "type": "string",
+      "question": "What period should I use? Example: 1h, 24h"
+    },
+    "price_source": {
+      "type": "string",
+      "question": "Which price source should I use? Example: chainlink, coingecko"
+    },
+    "token": {
+      "type": "string",
+      "question": "Which token balance should I watch?"
+    },
+    "token_address": {
+      "type": "evm_address",
+      "question": "What is the token contract address?"
+    },
+    "recipient_address": {
+      "type": "evm_address",
+      "question": "What is the recipient address?"
+    },
+    "minimum_amount": {
+      "type": "number_or_string",
+      "question": "What minimum amount should I use?"
+    },
+    "contract_address": {
+      "type": "evm_address",
+      "question": "Which contract address should I monitor?"
+    },
+    "event_signature": {
+      "type": "string",
+      "question": "What event signature should I use?"
+    },
+    "watched_address": {
+      "type": "evm_address",
+      "question": "Which address should I monitor?"
+    },
+    "gas_threshold": {
+      "type": "number",
+      "question": "What gas threshold should I use?"
+    },
+    "health_source": {
+      "type": "string",
+      "question": "Which network health source should I use?"
+    },
+    "protocol": {
+      "type": "string",
+      "question": "Which protocol should I use?"
+    },
+    "position_reference": {
+      "type": "string",
+      "question": "Which position should I monitor?"
+    },
+    "pool": {
+      "type": "string",
+      "question": "Which pool should I monitor?"
+    },
+    "position_id": {
+      "type": "string",
+      "question": "What is the position ID?"
+    },
+    "collection": {
+      "type": "string",
+      "question": "Which NFT collection should I use?"
+    },
+    "floor_price_source": {
+      "type": "string",
+      "question": "Which floor price source should I use?"
+    },
+    "marketplace": {
+      "type": "string",
+      "question": "Which marketplace should I use?"
+    },
+    "trait_filter": {
+      "type": "string",
+      "question": "What NFT trait filter should I use?"
+    },
+    "faucet_url": {
+      "type": "url",
+      "question": "What is the faucet URL?"
+    },
+    "claim_method": {
+      "type": "string",
+      "question": "How does the faucet claim work? Example: http_get, http_post, wallet_sign, browser"
+    },
+    "api_url": {
+      "type": "url",
+      "question": "What API URL should I use?"
+    },
+    "response_field": {
+      "type": "string",
+      "question": "Which response field should I read from the API?"
+    },
+    "operator": {
+      "type": "enum",
+      "allowed": ["eq", "neq", "gt", "gte", "lt", "lte", "contains", "not_contains"],
+      "question": "Which comparison operator should I use?"
+    },
+    "feed_url": {
+      "type": "url",
+      "question": "What feed URL should I monitor?"
+    },
+    "approver_reference": {
+      "type": "string",
+      "question": "Who should approve this action?"
+    },
+    "approver_references": {
+      "type": "array",
+      "question": "Who are the approvers?"
+    },
+    "duration": {
+      "type": "string",
+      "question": "How long should the condition remain true?"
+    },
+    "retry_interval": {
+      "type": "interval",
+      "question": "How often should retries happen?"
+    },
+    "timeout": {
+      "type": "interval",
+      "question": "What timeout should I use?"
+    },
+    "previous_step_reference": {
+      "type": "string",
+      "question": "Which previous step should this depend on?"
+    },
+    "to": {
+      "type": "email",
+      "question": "Which email should receive notifications?"
+    }
+  },
+  "triggers": [
+    {
+      "type": "run_once_at_datetime",
+      "category": "time",
+      "python_handler": "trigger_run_once_at_datetime",
+      "description": "Run once at a specific date and time.",
+      "required_fields": ["date", "time", "timezone"]
+    },
+    {
+      "type": "run_daily_at_time",
+      "category": "time",
+      "python_handler": "trigger_run_daily_at_time",
+      "description": "Run every day at a fixed time.",
+      "required_fields": ["time", "timezone"]
+    },
+    {
+      "type": "run_weekly_on_day_time",
+      "category": "time",
+      "python_handler": "trigger_run_weekly_on_day_time",
+      "description": "Run weekly on a specific day and time.",
+      "required_fields": ["time", "timezone", "weekday"]
+    },
+    {
+      "type": "run_monthly_on_date_time",
+      "category": "time",
+      "python_handler": "trigger_run_monthly_on_date_time",
+      "description": "Run monthly on a given date and time.",
+      "required_fields": ["day_of_month", "time", "timezone"]
+    },
+    {
+      "type": "run_every_interval",
+      "category": "time",
+      "python_handler": "trigger_run_every_interval",
+      "description": "Run repeatedly at an interval.",
+      "required_fields": ["interval"]
+    },
+    {
+      "type": "run_between_time_window",
+      "category": "time",
+      "python_handler": "trigger_run_between_time_window",
+      "description": "Run only during a given time window.",
+      "required_fields": ["start_time", "end_time", "timezone", "interval"]
+    },
+    {
+      "type": "run_on_cron_expression",
+      "category": "time",
+      "python_handler": "trigger_run_on_cron_expression",
+      "description": "Run using cron scheduling.",
+      "required_fields": ["cron", "timezone"]
+    },
+
+    {
+      "type": "token_price_below",
+      "category": "price",
+      "python_handler": "trigger_token_price_below",
+      "description": "Trigger when token price goes below threshold.",
+      "required_fields": ["asset", "quote_currency", "threshold", "price_source"]
+    },
+    {
+      "type": "token_price_above",
+      "category": "price",
+      "python_handler": "trigger_token_price_above",
+      "description": "Trigger when token price goes above threshold.",
+      "required_fields": ["asset", "quote_currency", "threshold", "price_source"]
+    },
+    {
+      "type": "token_price_crosses_range",
+      "category": "price",
+      "python_handler": "trigger_token_price_crosses_range",
+      "description": "Trigger when token enters a target range.",
+      "required_fields": ["asset", "quote_currency", "lower_bound", "upper_bound", "price_source"]
+    },
+    {
+      "type": "percent_price_change_over_period",
+      "category": "price",
+      "python_handler": "trigger_percent_price_change_over_period",
+      "description": "Trigger when price changes by a given percentage over a period.",
+      "required_fields": ["asset", "percent_change", "period", "price_source"]
+    },
+
+    {
+      "type": "wallet_balance_below",
+      "category": "wallet",
+      "python_handler": "trigger_wallet_balance_below",
+      "description": "Trigger when wallet balance falls below threshold.",
+      "required_fields": ["token", "threshold"]
+    },
+    {
+      "type": "wallet_balance_above",
+      "category": "wallet",
+      "python_handler": "trigger_wallet_balance_above",
+      "description": "Trigger when wallet balance rises above threshold.",
+      "required_fields": ["token", "threshold"]
+    },
+    {
+      "type": "incoming_transfer_detected",
+      "category": "wallet",
+      "python_handler": "trigger_incoming_transfer_detected",
+      "description": "Trigger when incoming transfer is detected.",
+      "required_fields": ["token"],
+      "optional_fields": ["minimum_amount"]
+    },
+    {
+      "type": "outgoing_transfer_detected",
+      "category": "wallet",
+      "python_handler": "trigger_outgoing_transfer_detected",
+      "description": "Trigger when outgoing transfer is detected.",
+      "required_fields": ["token"],
+      "optional_fields": ["minimum_amount"]
+    },
+
+    {
+      "type": "contract_event_emitted",
+      "category": "onchain",
+      "python_handler": "trigger_contract_event_emitted",
+      "description": "Trigger when a contract emits a given event.",
+      "required_fields": ["contract_address", "event_signature"]
+    },
+    {
+      "type": "new_block",
+      "category": "onchain",
+      "python_handler": "trigger_new_block",
+      "description": "Trigger on every new block.",
+      "required_fields": []
+    },
+    {
+      "type": "transaction_confirmed",
+      "category": "onchain",
+      "python_handler": "trigger_transaction_confirmed",
+      "description": "Trigger when a transaction reaches required confirmations.",
+      "required_fields": ["tx_hash", "confirmation_count"]
+    },
+    {
+      "type": "address_activity_detected",
+      "category": "onchain",
+      "python_handler": "trigger_address_activity_detected",
+      "description": "Trigger when a watched address performs activity.",
+      "required_fields": ["watched_address"]
+    },
+
+    {
+      "type": "gas_price_below",
+      "category": "network",
+      "python_handler": "trigger_gas_price_below",
+      "description": "Trigger when gas price falls below threshold.",
+      "required_fields": ["gas_threshold"]
+    },
+    {
+      "type": "gas_price_above",
+      "category": "network",
+      "python_handler": "trigger_gas_price_above",
+      "description": "Trigger when gas price rises above threshold.",
+      "required_fields": ["gas_threshold"]
+    },
+    {
+      "type": "network_status_changed",
+      "category": "network",
+      "python_handler": "trigger_network_status_changed",
+      "description": "Trigger when network/RPC health changes.",
+      "required_fields": ["health_source"]
+    },
+
+    {
+      "type": "health_factor_below",
+      "category": "defi",
+      "python_handler": "trigger_health_factor_below",
+      "description": "Trigger when lending health factor drops below threshold.",
+      "required_fields": ["protocol", "threshold"]
+    },
+    {
+      "type": "ltv_above",
+      "category": "defi",
+      "python_handler": "trigger_ltv_above",
+      "description": "Trigger when LTV rises above threshold.",
+      "required_fields": ["protocol", "threshold"]
+    },
+    {
+      "type": "yield_rate_above",
+      "category": "defi",
+      "python_handler": "trigger_yield_rate_above",
+      "description": "Trigger when APY rises above threshold.",
+      "required_fields": ["protocol", "threshold"]
+    },
+    {
+      "type": "yield_rate_below",
+      "category": "defi",
+      "python_handler": "trigger_yield_rate_below",
+      "description": "Trigger when APY drops below threshold.",
+      "required_fields": ["protocol", "threshold"]
+    },
+    {
+      "type": "position_profit_above",
+      "category": "defi",
+      "python_handler": "trigger_position_profit_above",
+      "description": "Trigger when position profit exceeds threshold.",
+      "required_fields": ["position_reference", "threshold"]
+    },
+    {
+      "type": "position_loss_below",
+      "category": "defi",
+      "python_handler": "trigger_position_loss_below",
+      "description": "Trigger when position loss exceeds threshold.",
+      "required_fields": ["position_reference", "threshold"]
+    },
+    {
+      "type": "liquidity_range_out_of_bounds",
+      "category": "defi",
+      "python_handler": "trigger_liquidity_range_out_of_bounds",
+      "description": "Trigger when LP position goes out of range.",
+      "required_fields": ["pool", "position_id"]
+    },
+
+    {
+      "type": "floor_price_below",
+      "category": "nft",
+      "python_handler": "trigger_floor_price_below",
+      "description": "Trigger when NFT floor falls below threshold.",
+      "required_fields": ["collection", "threshold", "floor_price_source"]
+    },
+    {
+      "type": "floor_price_above",
+      "category": "nft",
+      "python_handler": "trigger_floor_price_above",
+      "description": "Trigger when NFT floor rises above threshold.",
+      "required_fields": ["collection", "threshold", "floor_price_source"]
+    },
+    {
+      "type": "mint_live",
+      "category": "nft",
+      "python_handler": "trigger_mint_live",
+      "description": "Trigger when NFT mint goes live.",
+      "required_fields": ["contract_address"]
+    },
+    {
+      "type": "reveal_happened",
+      "category": "nft",
+      "python_handler": "trigger_reveal_happened",
+      "description": "Trigger when NFT reveal happens.",
+      "required_fields": ["collection"]
+    },
+    {
+      "type": "listing_price_below",
+      "category": "nft",
+      "python_handler": "trigger_listing_price_below",
+      "description": "Trigger when an NFT listing appears below threshold.",
+      "required_fields": ["collection", "marketplace", "threshold"]
+    },
+    {
+      "type": "trait_match_found",
+      "category": "nft",
+      "python_handler": "trigger_trait_match_found",
+      "description": "Trigger when an NFT trait match appears.",
+      "required_fields": ["collection", "trait_filter", "threshold"]
+    },
+
+    {
+      "type": "faucet_claim_interval",
+      "category": "testnet",
+      "python_handler": "trigger_faucet_claim_interval",
+      "description": "Trigger faucet claims on cooldown interval.",
+      "required_fields": ["interval", "faucet_url", "claim_method"]
+    },
+    {
+      "type": "test_balance_low_then_claim_faucet",
+      "category": "testnet",
+      "python_handler": "trigger_test_balance_low_then_claim_faucet",
+      "description": "Trigger faucet claim only when balance is low.",
+      "required_fields": ["threshold", "faucet_url", "claim_method"]
+    },
+
+    {
+      "type": "webhook_received",
+      "category": "external",
+      "python_handler": "trigger_webhook_received",
+      "description": "Trigger when a webhook is received.",
+      "required_fields": ["webhook_name"]
+    },
+    {
+      "type": "api_value_condition",
+      "category": "external",
+      "python_handler": "trigger_api_value_condition",
+      "description": "Trigger when API response satisfies condition.",
+      "required_fields": ["api_url", "response_field", "operator", "threshold"]
+    },
+    {
+      "type": "rss_or_feed_update",
+      "category": "external",
+      "python_handler": "trigger_rss_or_feed_update",
+      "description": "Trigger when RSS/feed updates.",
+      "required_fields": ["feed_url"]
+    },
+
+    {
+      "type": "manual_approval_received",
+      "category": "approval",
+      "python_handler": "trigger_manual_approval_received",
+      "description": "Trigger when a manual approval is received.",
+      "required_fields": ["approver_reference"]
+    },
+    {
+      "type": "multi_approval_threshold_met",
+      "category": "approval",
+      "python_handler": "trigger_multi_approval_threshold_met",
+      "description": "Trigger when enough approvers approve.",
+      "required_fields": ["approver_references", "threshold"]
+    },
+
+    {
+      "type": "all_conditions_true",
+      "category": "composite",
+      "python_handler": "trigger_all_conditions_true",
+      "description": "Trigger when all nested conditions are true.",
+      "required_fields": ["conditions"]
+    },
+    {
+      "type": "any_condition_true",
+      "category": "composite",
+      "python_handler": "trigger_any_condition_true",
+      "description": "Trigger when any nested condition is true.",
+      "required_fields": ["conditions"]
+    },
+    {
+      "type": "condition_true_for_duration",
+      "category": "composite",
+      "python_handler": "trigger_condition_true_for_duration",
+      "description": "Trigger when a condition stays true for a duration.",
+      "required_fields": ["condition", "duration"]
+    },
+    {
+      "type": "retry_until_success_with_timeout",
+      "category": "composite",
+      "python_handler": "trigger_retry_until_success_with_timeout",
+      "description": "Trigger repeated attempts until success or timeout.",
+      "required_fields": ["retry_interval", "timeout"]
+    },
+    {
+      "type": "sequence_after_previous_step",
+      "category": "composite",
+      "python_handler": "trigger_sequence_after_previous_step",
+      "description": "Trigger next step after previous step succeeds.",
+      "required_fields": ["previous_step_reference"]
+    },
+
+    {
+      "type": "automation_started",
+      "category": "lifecycle",
+      "python_handler": "trigger_automation_started",
+      "description": "Lifecycle trigger for automation start.",
+      "required_fields": []
+    },
+    {
+      "type": "automation_completed",
+      "category": "lifecycle",
+      "python_handler": "trigger_automation_completed",
+      "description": "Lifecycle trigger for automation completion.",
+      "required_fields": []
+    },
+    {
+      "type": "automation_failed",
+      "category": "lifecycle",
+      "python_handler": "trigger_automation_failed",
+      "description": "Lifecycle trigger for automation failure.",
+      "required_fields": []
+    },
+    {
+      "type": "step_started",
+      "category": "lifecycle",
+      "python_handler": "trigger_step_started",
+      "description": "Lifecycle trigger for step start.",
+      "required_fields": ["step_name"]
+    },
+    {
+      "type": "step_completed",
+      "category": "lifecycle",
+      "python_handler": "trigger_step_completed",
+      "description": "Lifecycle trigger for step completion.",
+      "required_fields": ["step_name"]
+    },
+    {
+      "type": "step_failed",
+      "category": "lifecycle",
+      "python_handler": "trigger_step_failed",
+      "description": "Lifecycle trigger for step failure.",
+      "required_fields": ["step_name"]
+    }
+  ]
+}

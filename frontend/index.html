@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <link rel="apple-touch-icon" href="/logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AEGIS AVM | Build Algorand Automations With AI</title>
+    <meta name="description" content="AEGIS AVM is the ultimate on-chain automation platform for Algorand. Build, deploy, and manage intelligent crypto agents and AVM automations with ease on Algorand Testnet." />
+    <meta name="keywords" content="AEGIS, Algorand, AVM, onchain automation, crypto agents, web3 automations, Algorand testnet, blockchain automation, intelligent agents" />
+    <link rel="canonical" href="https://aegis.live/" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://aegis.live/" />
+    <meta property="og:title" content="AEGIS | Build Onchain Automations With Ease" />
+    <meta property="og:description" content="Build, deploy, and manage intelligent crypto agents and web3 automations with ease." />
+    <meta property="og:image" content="/logo.png" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://aegis.live/" />
+    <meta property="twitter:title" content="AEGIS | Build Onchain Automations With Ease" />
+    <meta property="twitter:description" content="Build, deploy, and manage intelligent crypto agents and web3 automations with ease." />
+    <meta property="twitter:image" content="/logo.png" />
+
+    <script>
+      // Prevent flash of wrong theme
+      (function(){
+        var t=localStorage.getItem('aegis-theme')||'dark';
+        var d=t==='dark'||(t==='system'&&window.matchMedia('(prefers-color-scheme:dark)').matches);
+        if(d)document.documentElement.classList.add('dark');
+        document.documentElement.style.colorScheme=d?'dark':'light';
+      })();
+
+      // Node.js globals polyfill for algosdk/crypto
+      window.global = window.global || window;
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
