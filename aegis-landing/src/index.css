@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-black text-white selection:bg-[#aef98e]/30;
+  }
+}
+
+@layer utilities {
+  .btn-primary {
+    @apply bg-[#aef98e] text-black hover:bg-[#9ee07e] font-bold;
+  }
+}

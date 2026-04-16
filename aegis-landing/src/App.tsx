@@ -1,7 +1,6 @@
 import React from "react";
 import { useNavigate, Link } from "react-router-dom";
-import logo from "../assets/Aegis-logo.jpeg";
-import uiss from "../assets/uiss.png";
+import logo from "./assets/Aegis-logo.jpeg";
 
 // Inline Button Component
 const Button = React.forwardRef(
@@ -40,16 +39,12 @@ const ArrowRight = ({ className = "", size = 16 }: any) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
 );
 
-const Menu = ({ className = "", size = 24 }: any) => (
+const Menu = ({ className = " ", size = 24 }: any) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><line x1="4" x2="20" y1="12" y2="12" /><line x1="4" x2="20" y1="6" y2="6" /><line x1="4" x2="20" y1="18" y2="18" /></svg>
 );
 
-const X = ({ className = "", size = 24 }: any) => (
+const X = ({ className = " ", size = 24 }: any) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>
-);
-
-const Check = ({ className = "", size = 16 }: any) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><polyline points="20 6 9 17 4 12" /></svg>
 );
 
 const Zap = ({ size = 24 }: any) => (
@@ -62,10 +57,6 @@ const Wallet = ({ size = 24 }: any) => (
 
 const Clock = ({ size = 24 }: any) => (
     <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-);
-
-const Database = ({ size = 24 }: any) => (
-    <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3"/></svg>
 );
 
 const Send = ({ size = 24 }: any) => (
@@ -82,12 +73,10 @@ const BackgroundElements = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Toggle visibility every 400px of scroll
   const isBtcVisible = Math.floor(scrollPos / 400) % 2 === 0;
 
   return (
     <div className="fixed inset-0 pointer-events-none -z-20 overflow-hidden opacity-10">
-      {/* Bitcoin Icon */}
       <div 
         className={`absolute top-1/4 left-[15%] transition-all duration-1000 ease-in-out ${isBtcVisible ? "opacity-100 scale-100 blur-none" : "opacity-0 scale-50 blur-xl"}`}
         style={{ animation: "spin 20s linear infinite, float 10s ease-in-out infinite" }}
@@ -97,7 +86,6 @@ const BackgroundElements = () => {
         </svg>
       </div>
 
-      {/* Dollar Icon */}
       <div 
         className={`absolute bottom-1/4 right-[15%] transition-all duration-1000 ease-in-out ${!isBtcVisible ? "opacity-100 scale-100 blur-none" : "opacity-0 scale-50 blur-xl"}`}
         style={{ animation: "spin-reverse 25s linear infinite, float 12s ease-in-out infinite" }}
@@ -110,7 +98,6 @@ const BackgroundElements = () => {
   );
 };
 
-// Reveal Wrapper Component
 const Reveal = ({ children }: any) => {
     const [isVisible, setIsVisible] = React.useState(false);
     const ref = React.useRef<any>(null);
@@ -149,7 +136,7 @@ const Navigation = React.memo(({ onLaunch }: { onLaunch: () => void }) => {
           <div className="hidden md:flex items-center justify-center gap-6 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
             <a href="#features" className="text-xs text-[#aef98e]/60 hover:text-[#aef98e] transition-colors">Features</a>
             <a href="#faq" className="text-xs text-[#aef98e]/60 hover:text-[#aef98e] transition-colors">FAQ</a>
-            <Link to="/documentation" className="text-xs text-[#aef98e]/60 hover:text-[#aef98e] transition-colors">Docs</Link>
+            <a href="#" className="text-xs text-[#aef98e]/60 hover:text-[#aef98e] transition-colors">Docs</a>
           </div>
 
           <div className="hidden md:flex items-center gap-3">
@@ -168,11 +155,11 @@ const Navigation = React.memo(({ onLaunch }: { onLaunch: () => void }) => {
       </nav>
 
       {mobileMenuOpen && (
-        <div className="md:hidden bg-black/95 backdrop-blur-md border-t border-gray-800/50 animate-[slideDown_0.3s_ease-out]">
+        <div className="md:hidden bg-black/95 backdrop-blur-md border-t border-gray-800/50">
           <div className="px-6 py-4 flex flex-col gap-4">
             <a href="#features" className="text-sm text-[#aef98e]/60 hover:text-[#aef98e] transition-colors" onClick={() => setMobileMenuOpen(false)}>Features</a>
             <a href="#faq" className="text-sm text-[#aef98e]/60 hover:text-[#aef98e] transition-colors" onClick={() => setMobileMenuOpen(false)}>FAQ</a>
-            <Link to="/documentation" className="text-sm text-[#aef98e]/60 hover:text-[#aef98e] transition-colors" onClick={() => setMobileMenuOpen(false)}>Docs</Link>
+            <a href="#" className="text-sm text-[#aef98e]/60 hover:text-[#aef98e] transition-colors" onClick={() => setMobileMenuOpen(false)}>Docs</a>
             <div className="pt-4 border-t border-gray-800/50">
               <Button type="button" variant="default" size="sm" className="w-full" onClick={onLaunch}>Launch App</Button>
             </div>
@@ -183,9 +170,7 @@ const Navigation = React.memo(({ onLaunch }: { onLaunch: () => void }) => {
   );
 });
 
-// Hero Component
 const Hero = React.memo(({ onGetStarted }: { onGetStarted: () => void }) => {
-  const navigate = useNavigate();
   return (
     <section className="relative min-h-[85vh] flex flex-col items-center justify-start px-6 pt-24 pb-32 overflow-hidden">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10 opacity-40 pointer-events-none">
@@ -203,15 +188,13 @@ const Hero = React.memo(({ onGetStarted }: { onGetStarted: () => void }) => {
 
       <div className="flex flex-col sm:flex-row items-center gap-4 mb-16 relative z-10">
         <Button variant="gradient" size="lg" className="px-7 py-5 text-sm shadow-[0_0_30px_-5px_#aef98e55]" onClick={onGetStarted}>Get Started</Button>
-        <Button variant="secondary" size="lg" className="px-7 py-5 text-sm" onClick={() => navigate("/documentation")}>Open Docs</Button>
+        <Button variant="secondary" size="lg" className="px-7 py-5 text-sm">Open Docs</Button>
       </div>
 
       <div className="w-full max-w-4xl relative group">
         <div className="absolute -inset-1 bg-gradient-to-r from-[#aef98e]/0 via-[#aef98e]/20 to-[#aef98e]/0 blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
-        {/* Hard Orange Glow Effect - Fading Upwards */}
         <div className="absolute -top-24 left-3 right-3 h-24 bg-gradient-to-t from-[#f97316]/40 via-[#f97316]/10 to-transparent z-0 blur-2xl pointer-events-none"></div>
         <div className="absolute top-0 left-3 right-3 h-[2px] bg-orange-500/50 z-0 shadow-[0_0_15px_#f97316]"></div>
-        {/* Ambient Glow for bottom/sides */}
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#f97316]/10 z-0 blur-3xl rounded-3xl pointer-events-none"></div>
         <div className="absolute -inset-2 shadow-[0_0_40px_rgba(249,115,22,0.15)] z-0 rounded-3xl pointer-events-none"></div>
         
@@ -230,7 +213,6 @@ const Hero = React.memo(({ onGetStarted }: { onGetStarted: () => void }) => {
   );
 });
 
-// Features Component
 const Features = React.memo(() => {
   const features = [
     {
@@ -281,8 +263,6 @@ const Features = React.memo(() => {
   );
 });
 
-
-// FAQ Component
 const FAQ = React.memo(() => {
   const faqs = [
     { q: "What is the Aegis Layer?", a: "Aegis is an autonomous execution environment designed to simplify complex on-chain workflows through advanced agentic orchestration." },
@@ -312,20 +292,14 @@ const FAQ = React.memo(() => {
   );
 });
 
-// Launch Section
 const Launch = React.memo(({ onLaunch }: { onLaunch: () => void }) => {
-    const navigate = useNavigate();
     return (
         <section id="launch" className="py-32 px-6">
             <div className="max-w-3xl mx-auto p-8 md:p-12 rounded-3xl bg-gradient-to-br from-[#aef98e]/20 to-transparent border border-[#aef98e]/20 text-center relative overflow-hidden">
                 <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-40 h-40 bg-[#aef98e]/10 blur-[80px] rounded-full"></div>
-                
                 <h2 className="text-2xl md:text-4xl font-bold text-[#aef98e] mb-8">Deploy Your First Agent</h2>
-                
                 <div className="relative flex justify-between items-start gap-0 mb-12 px-2 md:px-6">
-                    {/* The "Chain" Line */}
                     <div className="absolute top-4 left-[10%] right-[10%] h-[1px] bg-white/10 -z-0 hidden md:block" />
-                    
                     {["Connect wallet", "Describe automation", "Review plan", "Deploy wallet", "Run autonomously"].map((step, i) => (
                         <div key={i} className="flex flex-col items-center flex-1 relative z-10">
                             <div className="w-8 h-8 rounded-full bg-[#aef98e] text-black text-[11px] font-bold flex items-center justify-center mb-4 shadow-[0_0_25px_-5px_#aef98e] relative z-20 border-4 border-[#1e3a1a] box-content">
@@ -337,10 +311,9 @@ const Launch = React.memo(({ onLaunch }: { onLaunch: () => void }) => {
                         </div>
                     ))}
                 </div>
-
                 <div className="flex flex-col sm:flex-row justify-center gap-4">
                     <Button variant="gradient" size="lg" className="px-8 py-4 text-sm shadow-[0_0_40px_-10px_#aef98e]" onClick={onLaunch}>Launch Aegis</Button>
-                    <Button variant="secondary" size="lg" className="px-8 py-4 text-sm" onClick={() => navigate("/documentation")}>View Documentation</Button>
+                    <Button variant="secondary" size="lg" className="px-8 py-4 text-sm">View Documentation</Button>
                 </div>
             </div>
         </section>
@@ -351,18 +324,14 @@ const Footer = () => (
   <footer className="pt-32 pb-16 border-t border-gray-900/50 bg-black">
     <div className="max-w-6xl mx-auto px-6">
       <div className="grid grid-cols-1 md:grid-cols-12 gap-16 mb-24">
-        {/* Brand Section */}
         <div className="md:col-span-5 space-y-8">
           <div className="flex items-center gap-3">
               <img src={logo} alt="Aegis Logo" className="h-10 w-auto rounded-lg shadow-[0_0_20px_rgba(174,249,142,0.1)]" />
-              <span className="text-[#aef98e] text-3xl font-black tracking-tighter"></span>
           </div>
           <p className="text-[#9ca3af] text-lg leading-relaxed max-w-sm font-light">
             Enabling the decentralized execution layer for a future powered by autonomous on-chain agents.
           </p>
         </div>
-
-        {/* Links Sections */}
         <div className="md:col-span-7 grid grid-cols-2 md:grid-cols-3 gap-12">
           <div className="space-y-6">
               <h5 className="text-[#aef98e] font-bold uppercase text-[10px] tracking-[4px]">Ecosystem</h5>
@@ -389,52 +358,28 @@ const Footer = () => (
           </div>
         </div>
       </div>
-
       <div className="pt-12 border-t border-gray-900/50 flex flex-col md:flex-row justify-between items-center gap-6">
           <p className="text-[#9ca3af]/50 text-xs font-medium tracking-wider">
             © 2026 AEGIS. Deployed on ALGORAND
           </p>
-          <div className="flex gap-8">
-              
-          </div>
       </div>
     </div>
   </footer>
 );
 
-// Main Component
-export default function MarketingPage() {
+export default function App() {
   const navigate = useNavigate();
   
   const handleStart = () => {
-    navigate("/dashboard");
+    // Navigate or link to main app
+    window.location.href = "https://aegis-ai.vercel.app"; 
   };
 
   return (
     <main className="min-h-screen bg-black text-white selection:bg-[#aef98e]/30">
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap');
-        
-        /* Apply font and zoom only to this page */
-        .marketing-root { 
-          font-family: 'Outfit', sans-serif; 
-          zoom: 1.2;
-        }
-        .marketing-root * { scroll-behavior: smooth; }
-        
-        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
-        details > summary::-webkit-details-marker { display: none; }
-        
-        /* Tailored scrollbar for marketing */
-        .marketing-root::-webkit-scrollbar { width: 10px; }
-        .marketing-root::-webkit-scrollbar-track { background: #000; }
-        .marketing-root::-webkit-scrollbar-thumb { background: #111; border-radius: 10px; border: 2px solid #000; }
-        .marketing-root::-webkit-scrollbar-thumb:hover { background: #222; }
-        
-        @keyframes waterRipple {
-          0% { transform: scale(1); opacity: 0.5; }
-          100% { transform: scale(2.5); opacity: 0; }
-        }
+        .marketing-root { font-family: 'Outfit', sans-serif; }
         @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         @keyframes spin-reverse { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
         @keyframes float { 0%, 100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-30px) rotate(5deg); } }
